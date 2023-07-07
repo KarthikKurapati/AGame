@@ -1,2 +1,2 @@
 # First Project
-## A jumper game
+## A jumper/runner game

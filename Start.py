@@ -4,8 +4,9 @@ pygame.init()
 pygame.display.set_caption('Runner')
 clock = pygame.time.Clock()
 test_font = pygame.font.Font('font/ysp.ttf',50)
-game_active = True
-gameTime =0;
+game_active = False
+gameTime = 0;
+score = 0;
 
 def displayScore():
     current_time = int(pygame.time.get_ticks() / 1000)
@@ -13,6 +14,11 @@ def displayScore():
     score_rectangle = score_surface.get_rect(center = (400,50))
     screen.blit(score_surface,score_rectangle)
 
+def updateScore():
+    score_title_surface = test_font.render("Score: " + str(score),False,(111,196,169))
+    score_title_surface = pygame.transform.rotozoom(score_title_surface,0,0.5)
+    score_title_rectangle = score_title_surface.get_rect(center = (400,300))
+    screen.blit(score_title_surface,score_title_rectangle)
 
 screen = pygame.display.set_mode((800,400))
 sky_surface = pygame.image.load("graphics/Sky.png").convert_alpha()
@@ -28,6 +34,16 @@ player_surface = pygame.image.load("graphics/Player/player_walk_1.png").convert_
 player_rectangle = player_surface.get_rect(midbottom = (50,300))
 player_gravity = 0;
 
+# Intro Screen
+player_stand = pygame.image.load("graphics/Player/player_stand.png").convert_alpha()
+player_stand = pygame.transform.rotozoom(player_stand,0,2)
+player_stand_rectangle = player_stand.get_rect(center = (400,150))
+
+#Instructions
+instruct_surface = test_font.render('Press SPACE to start!',False,(111,196,169))
+instruct_surface = pygame.transform.rotozoom(instruct_surface,0,0.5)
+instruct_rectangle = instruct_surface.get_rect(center = (400,350))
+
 while True:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -42,8 +58,7 @@ while True:
                 game_active = True
                 gameTime = int(pygame.time.get_ticks() / 1000)
                 snail_rectangle.x = 800
-                  
-        
+                     
     if game_active:
         screen.blit(sky_surface,(0,0))
         screen.blit(ground_surface,(0,300))
@@ -64,11 +79,17 @@ while True:
 
         #Collision
         if snail_rectangle.colliderect(player_rectangle):
+            score = int(pygame.time.get_ticks() / 1000) - gameTime
             game_active = False
 
         displayScore()
     else:
-         screen.fill('Brown')
+        screen.fill((94,129,162))
+        screen.blit(instruct_surface,instruct_rectangle)
+        screen.blit(player_stand,player_stand_rectangle)
+        if(score != 0):
+            updateScore();
+
     
     pygame.display.update()
     clock.tick(60)

@@ -1,2 +1,2 @@
 # First Project
-## Is this git working??
+## Some Sort of game I am making to get to use pygame

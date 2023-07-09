@@ -24,9 +24,6 @@ def updateScore():
     screen.blit(score_title_surface,score_title_rectangle)
 
 def obstacle_movement(obstacle_list):
-
-
-
     if obstacle_list:
         for obstacle_rectangle in obstacle_list:
             obstacle_rectangle.x -= 5

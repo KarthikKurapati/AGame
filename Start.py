@@ -4,21 +4,21 @@ from sys import exit
 pygame.init()
 pygame.display.set_caption('Runner')
 clock = pygame.time.Clock()
-test_font = pygame.font.Font('font/ysp.ttf',50)
+test_font = pygame.font.Font('font/ysps.ttf',50)
 game_active = False
 gameTime = 0
-bg_music = pygame.mixer.Sound("audio/music.wav")
+bg_music = pygame.mixer.Sound("audio/bg_music.wav")
 global score;
 score = 0;
 
 class Player(pygame.sprite.Sprite):
     def __init__(self):
         super().__init__()
-        player_walk_1 = pygame.image.load("graphics/Player/player_walk_1.png").convert_alpha()
-        player_walk_2 = pygame.image.load("graphics/Player/player_walk_2.png").convert_alpha()
+        player_walk_1 = pygame.image.load("graphic/Player/player_walk_1.png").convert_alpha()
+        player_walk_2 = pygame.image.load("graphic/Player/player_walk_2.png").convert_alpha()
         self.player_walk = [player_walk_1,player_walk_2]
         self.player_index = 0;
-        self.player_jump = pygame.image.load("graphics/Player/jump.png").convert_alpha()
+        self.player_jump = pygame.image.load("graphic/Player/jump.png").convert_alpha()
 
         self.image = self.player_walk[self.player_index]
         self.rect = self.image.get_rect(midbottom = (80,300))
@@ -53,14 +53,14 @@ class Obstacle(pygame.sprite.Sprite):
     def __init__(self,type):
         super().__init__()
         if type == 'fly':
-            fly_frame_1 = pygame.image.load('graphics/Fly/Fly1.png').convert_alpha()
-            fly_frame_2 = pygame.image.load('graphics/Fly/Fly2.png').convert_alpha()
+            fly_frame_1 = pygame.image.load('graphic/Fly/Fly1.png').convert_alpha()
+            fly_frame_2 = pygame.image.load('graphic/Fly/Fly2.png').convert_alpha()
             self.frames = [fly_frame_1,fly_frame_2]
             fly_index = 0;
             y_pos = 210
         else:
-            snail_frame_1 = pygame.image.load("graphics/snail/snail1.png").convert_alpha()
-            snail_frame_2 = pygame.image.load("graphics/snail/snail2.png").convert_alpha()
+            snail_frame_1 = pygame.image.load("graphic/snail/snail1.png").convert_alpha()
+            snail_frame_2 = pygame.image.load("graphic/snail/snail2.png").convert_alpha()
             self.frames = [snail_frame_1,snail_frame_2]
             snail_index = 0;
             y_pos = 300
@@ -100,8 +100,8 @@ def collision_sprite():
         return True
 
 screen = pygame.display.set_mode((800,400))
-sky_surface = pygame.image.load("graphics/Sky.png").convert_alpha()
-ground_surface = pygame.image.load('graphics/Ground.png').convert_alpha()
+sky_surface = pygame.image.load("graphic/Sky.png").convert_alpha()
+ground_surface = pygame.image.load('graphic/Ground.png').convert_alpha()
 
 #Groups
 player = pygame.sprite.GroupSingle()
@@ -109,7 +109,7 @@ player.add(Player())
 obstacle_group = pygame.sprite.Group()
 
 # Intro Screen
-player_stand = pygame.image.load("graphics/Player/player_stand.png").convert_alpha()
+player_stand = pygame.image.load("graphic/Player/player_stand.png").convert_alpha()
 player_stand = pygame.transform.rotozoom(player_stand,0,2)
 player_stand_rectangle = player_stand.get_rect(center = (400,150))
 bg_music.play(loops = -1)

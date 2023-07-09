@@ -15,6 +15,7 @@ def displayScore():
     score_surface = test_font.render(f'{current_time - gameTime}',False,(64,64,64))
     score_rectangle = score_surface.get_rect(center = (400,50))
     screen.blit(score_surface,score_rectangle)
+    print('yes')
 
 def updateScore():
     score_title_surface = test_font.render("Score: " + str(score),False,(111,196,169))
